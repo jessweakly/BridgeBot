@@ -46,9 +46,9 @@ float gForceX, gForceY, gForceZ;
 float average = 0;
 int LED = 13;
 int FL[2] = {10, 6}; //First is forward, second is back
-int FR[2] = {11, 5};
+int FR[2] = {3, 4};
 int RL[2] = {8, 9};
-int RR[2] = {4, 3};
+int RR[2] = {11, 5};
 int ten = 0;
 
 int incomingByte;
@@ -56,7 +56,7 @@ float AvgA[8];
 int count = 0;
 char state = 's';
 
-int motors[][2] = {{10, 6}, {11, 5}, {8, 9}, {3, 4}}; //NOT Flipped
+int motors[][2] = {{10, 6}, {3, 4}, {8, 9}, {5, 11}}; //NOT Flipped
 
 int speedVariants[] = {180, 255, 180, 255}; //FL,FR,RL,RR
 float transGain = 5;
@@ -115,6 +115,13 @@ void loop() {
       //Serial.print(" Stopped \n");
       analogWrite(LED, 0);
       break;
+
+    
+    case 'r':
+      turnRight(200);
+    case 'l':
+      turnLeft(200);
+    
     case 'f':
       driveForward(200);
       ten++;
@@ -187,6 +194,28 @@ void loop() {
   delay(75);
 }
 
+
+void turnLeft(int speed) {
+  for (int i = 0; i < 4; i +=2) { //left motors back
+    analogWrite(motors[i][0], 0);
+    analogWrite(motors[i][1], speed * speedVariants[i]/255);
+  }
+  for (int i = 1; i < 4; i +=2) {  //ight motors forward
+    analogWrite(motors[i][1], 0);
+    analogWrite(motors[i][0], speed * speedVariants[i]/255);
+  }
+}
+
+void turnRight(int speed) {
+    for (int i = 1; i < 4; i +=2) { //right motors back
+    analogWrite(motors[i][0], 0);
+    analogWrite(motors[i][1], speed * speedVariants[i]/255);
+  }
+  for (int i = 0; i < 4; i +=2) {  //left motors forward
+    analogWrite(motors[i][1], 0);
+    analogWrite(motors[i][0], speed * speedVariants[i]/255);
+  }
+}
 
 void driveForward(int speed) {
   for (int i = 0; i < 4; i++) {

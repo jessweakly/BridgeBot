@@ -1,11 +1,10 @@
-
  /*    Uses interrupts to read two encoders
  *     Can set each encoder to a target
  *  by Jessica McWilliams
  */
 
 #include <Wire.h>
-#include "MyMiniMoto.h"
+#include "ARM_MiniMoto.h"
 
 
  #if defined(ARDUINO_SAMD_ZERO) && defined(SERIAL_PORT_USBVIRTUAL)
