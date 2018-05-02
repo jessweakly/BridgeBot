@@ -70,15 +70,15 @@ float rotX, rotY, rotZ;
 #endif
 
 void setup() {
-  Serial1.begin(115200);
+  Serial.begin(115200);
   Wire.begin();
   setupMPU();
-  Serial1.println("Start");
+  Serial.println("Start");
 }
 
 
 void loop() {
-  incomingByte = Serial1.read();
+  incomingByte = Serial.read();
   recordAccelRegisters();
   recordGyroRegisters();
   printData();
@@ -288,20 +288,20 @@ void processGyroData() {
 }
 
 void printData() {
-  Serial1.print("");
-  Serial1.print(" ");
-  Serial1.print(rotX);
-  Serial1.print(" ");
-  Serial1.print(rotY);
-  Serial1.print(" ");
-  Serial1.print(rotZ);
-  Serial1.print(" ");
-  Serial1.print(" ");
-  Serial1.print(gForceX);
-  Serial1.print(" ");
-  Serial1.print(gForceY);
-  Serial1.print(" ");
-  Serial1.println(gForceZ);
+  Serial.print("");
+  Serial.print(" ");
+  Serial.print(rotX);
+  Serial.print(" ");
+  Serial.print(rotY);
+  Serial.print(" ");
+  Serial.print(rotZ);
+  Serial.print(" ");
+  Serial.print(" ");
+  Serial.print(gForceX);
+  Serial.print(" ");
+  Serial.print(gForceY);
+  Serial.print(" ");
+  Serial.println(gForceZ);
 //  Serial.print("");
 //  Serial.print(" ");
 //  Serial.print(rotX);
